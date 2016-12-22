@@ -16,7 +16,7 @@ public class DijkstraPathFinder {
         this.size = graph.size();
     }
 
-    public ArrayList<Integer> shortestPath(int NodeA, int NodeB) {
+    public Integer[] shortestPath(int NodeA, int NodeB) {
         prevNode = new HashMap<Integer, Integer>();
         weightStore = new HashMap<Integer, Integer>();
         priorityQueue = new PriorityQueue<>(size, pqComparator);
@@ -66,10 +66,9 @@ public class DijkstraPathFinder {
         while (temporaryNodePath.size() > 0) {
             nodePath.add(temporaryNodePath.pop());
         }
-        return nodePath;
+        Integer[] result = nodePath.toArray(new Integer[nodePath.size()]);
+        return result;
     }
-
-
 
     public Comparator<Integer> pqComparator = new Comparator<Integer>() {
 

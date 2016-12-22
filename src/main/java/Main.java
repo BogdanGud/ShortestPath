@@ -25,10 +25,11 @@ public class Main {
         graph.addEdge(new DirectedEdge(9,10,11));
         graph.addEdge(new DirectedEdge(2,6,3));
 
+
        // System.out.println(graph);
 
         DijkstraPathFinder finder = new DijkstraPathFinder(graph);
-        System.out.println(finder.shortestPath(1,8));
-        System.out.println(finder.shortestPath(2,7));
+       // System.out.println(finder.shortestPath(1,8));
+       // System.out.println(finder.shortestPath(2,7));
     }
 }

@@ -1,11 +1,16 @@
 package bogdangud.shortestpath.model;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Digraph {
     private HashMap<Integer, ArrayList<DirectedEdge>> adjacencyList = new HashMap<>();
+    private static final Logger log = Logger.getLogger(Digraph.class);
+
+
 
     public Digraph() {
     }
@@ -27,6 +32,7 @@ public class Digraph {
 
         if (!edgeExists)
             currentEdges.add(newEdge);
+        log.info("The edge was created.");
 
         adjacencyList.put(newEdge.getSource(), currentEdges);
     }
