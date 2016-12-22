@@ -5,7 +5,6 @@ import org.junit.Test;
 
 public class BasicTest {
     @Test
-    @Ignore
     public void test() {
         Digraph graph = new Digraph.Builder().edge(1,2,3).edge(1,4,2).edge(1,3,4).edge(2,6,3).edge(3,6,6)
                 .edge(4,5,5).edge(4,6,2).edge(5,7,6).edge(5,9,12).edge(6,5,1).edge(6,8,7).edge(7,10,4)

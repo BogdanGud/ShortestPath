@@ -1,4 +1,6 @@
 import bogdangud.shortestpath.model.Digraph;
+import bogdangud.shortestpath.model.DirectedEdge;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -8,6 +10,7 @@ public class DijkstraPathFinder {
     private HashMap<Integer, Integer> weightStore;
     private HashMap<Integer, Integer> prevNode;
     private PriorityQueue<Integer> priorityQueue;
+    private static final Logger log = Logger.getLogger(Digraph.class);
 
 
     public DijkstraPathFinder(Digraph graph) {
@@ -16,11 +19,15 @@ public class DijkstraPathFinder {
     }
 
     public Integer[] shortestPath(int NodeA, int NodeB) {
-        prevNode = new HashMap<Integer, Integer>();
-        weightStore = new HashMap<Integer, Integer>();
+        log.info("Start calculating shortest path from NodeA to NodeB");
+
+        prevNode = new HashMap<>();
+        weightStore = new HashMap<>();
         priorityQueue = new PriorityQueue<>(size, pqComparator);
 
+
         for (int node : graph.getVertices()) {
+
             weightStore.put(node, Integer.MAX_VALUE);
         }
 
@@ -30,11 +37,11 @@ public class DijkstraPathFinder {
 
         while (priorityQueue.size() > 0) {
             int currentNode = priorityQueue.poll();
-            ArrayList<Digraph.DirectedEdge> nearByNodes = graph.edgesOf(currentNode);
+            ArrayList<DirectedEdge> nearByNodes = graph.edgesOf(currentNode);
 
             if (nearByNodes == null) continue;
 
-            for (Digraph.DirectedEdge nearByNode : nearByNodes) {
+            for (DirectedEdge nearByNode : nearByNodes) {
                 int nextNode = nearByNode.getTarget();
 
                 int newDistance = weightStore.get(currentNode) + nearByNode.getWeight();
@@ -57,7 +64,7 @@ public class DijkstraPathFinder {
         temporaryNodePath.push(NodeB);
 
         int temp = NodeB;
-        while (prevNode.get(temp) >= 0 && prevNode.containsKey(temp) && temp >= 0) {
+        while (prevNode.get(temp) >= 0 && temp >= 0) {
             temp = prevNode.get(temp);
             temporaryNodePath.push(temp);
         }
