@@ -1,5 +1,4 @@
 import bogdangud.shortestpath.model.Digraph;
-import bogdangud.shortestpath.model.DirectedEdge;
 
 import java.util.*;
 
@@ -31,11 +30,11 @@ public class DijkstraPathFinder {
 
         while (priorityQueue.size() > 0) {
             int currentNode = priorityQueue.poll();
-            ArrayList<DirectedEdge> nearByNodes = graph.edgesOf(currentNode);
+            ArrayList<Digraph.DirectedEdge> nearByNodes = graph.edgesOf(currentNode);
 
             if (nearByNodes == null) continue;
 
-            for (DirectedEdge nearByNode : nearByNodes) {
+            for (Digraph.DirectedEdge nearByNode : nearByNodes) {
                 int nextNode = nearByNode.getTarget();
 
                 int newDistance = weightStore.get(currentNode) + nearByNode.getWeight();
