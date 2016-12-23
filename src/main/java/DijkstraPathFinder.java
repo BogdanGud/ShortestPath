@@ -12,22 +12,19 @@ public class DijkstraPathFinder {
     private PriorityQueue<Integer> priorityQueue;
     private static final Logger log = Logger.getLogger(Digraph.class);
 
-
     public DijkstraPathFinder(Digraph graph) {
         this.graph = graph;
         this.size = graph.size();
     }
 
     public Integer[] shortestPath(int NodeA, int NodeB) {
-        log.info("Start calculating shortest path from NodeA to NodeB");
+        log.info("Start calculating shortest path from Node " + NodeA + " to Node " + NodeB);
 
         prevNode = new HashMap<>();
         weightStore = new HashMap<>();
         priorityQueue = new PriorityQueue<>(size, pqComparator);
 
-
         for (int node : graph.getVertices()) {
-
             weightStore.put(node, Integer.MAX_VALUE);
         }
 
@@ -53,9 +50,9 @@ public class DijkstraPathFinder {
                     if (weightStore.get(nextNode) > newDistance) {
                         prevNode.put(nextNode, currentNode);
                         weightStore.put(nextNode, newDistance);
+                        log.info("Insert into weight store Node " + nextNode + " with new distance " + newDistance);
                     }
                 }
-
             }
         }
 
@@ -71,13 +68,14 @@ public class DijkstraPathFinder {
 
         while (temporaryNodePath.size() > 0) {
             nodePath.add(temporaryNodePath.pop());
+            log.info("Add to node path  Node " + nodePath.get(nodePath.size() - 1));
+
         }
         Integer[] result = nodePath.toArray(new Integer[nodePath.size()]);
         return result;
     }
 
     public Comparator<Integer> pqComparator = new Comparator<Integer>() {
-
         public int compare(Integer objectA, Integer objectB) {
             if (weightStore.get(objectA) > weightStore.get(objectB)) {
                 return 1;
@@ -87,7 +85,5 @@ public class DijkstraPathFinder {
             return 0;
         }
     };
-
-
 }
 

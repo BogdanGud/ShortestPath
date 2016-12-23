@@ -11,7 +11,6 @@ public class Digraph {
     private static final Logger log = Logger.getLogger(Digraph.class);
 
     private Digraph() {
-
     }
 
     private void addEdge(int source, int target, int weight) {
@@ -20,9 +19,7 @@ public class Digraph {
         if (!adjacencyList.containsKey(newEdge.getSource())) {
             adjacencyList.put(newEdge.getSource(), new ArrayList<>());
         }
-
         ArrayList<DirectedEdge> currentEdges = adjacencyList.get(newEdge.getSource());
-
         boolean edgeExists = false;
         for (int i = 0; i < currentEdges.size(); i++) {
             if (currentEdges.get(i).getTarget() == newEdge.getTarget()) {
@@ -31,17 +28,15 @@ public class Digraph {
                 break;
             }
         }
-
         if (!edgeExists) {
             currentEdges.add(newEdge);
         }
-        log.info("New edge was created from * to *, weight = *");
+        log.info("New edge was created from " + source + " to " + target + ", weight = " + weight);
         adjacencyList.put(newEdge.getSource(), currentEdges);
     }
 
 
     public static class Builder {
-
         private Digraph digraph;
 
         public Builder() {
@@ -50,18 +45,14 @@ public class Digraph {
         }
 
         public Builder edge(int source, int target, int weight) {
-
             this.digraph.addEdge(source, target, weight);
-
             return this;
         }
 
         public Digraph build() {
             return this.digraph;
         }
-
     }
-
 
     public ArrayList<DirectedEdge> edgesOf(int node) {
         return adjacencyList.get(node);
@@ -98,7 +89,6 @@ public class Digraph {
 
             for (DirectedEdge edge : currentEdges)
                 out += edge.getTarget() + " @ " + edge.getWeight() + ", ";
-
             out += "\n";
         }
         return out;
